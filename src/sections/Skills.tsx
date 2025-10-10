@@ -1,4 +1,4 @@
-import React from 'react'
+// React import not needed with new JSX transform
 
 type Skill = {
   category: string

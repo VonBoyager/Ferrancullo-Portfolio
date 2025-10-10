@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface ScrollAnimationsProps {
   children: React.ReactNode
 }
 
 export function ScrollAnimations({ children }: ScrollAnimationsProps) {
-  const observerRef = useRef<IntersectionObserver | null>(null)
+  const observerRef = useRef(null)
 
   useEffect(() => {
     // Create intersection observer for scroll animations
@@ -26,7 +26,9 @@ export function ScrollAnimations({ children }: ScrollAnimationsProps) {
     // Observe all sections
     const sections = document.querySelectorAll('.section')
     sections.forEach((section) => {
-      observerRef.current?.observe(section)
+      if (observerRef.current) {
+        observerRef.current.observe(section)
+      }
     })
 
     return () => {

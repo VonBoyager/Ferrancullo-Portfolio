@@ -1,4 +1,4 @@
-import React from 'react'
+// React import not needed with new JSX transform
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { ScrollAnimations } from './components/ScrollAnimations'
