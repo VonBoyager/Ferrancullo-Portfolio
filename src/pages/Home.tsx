@@ -1,8 +1,6 @@
-// React import not needed with new JSX transform
-
-export function Hero() {
+export function Home() {
   return (
-    <section className="section hero" aria-label="Hero">
+    <section className="section hero" aria-label="Home">
       <div className="container">
         <div className="panel panel--inset">
           <div className="hero-content">
@@ -14,8 +12,8 @@ export function Hero() {
               PASSIONATE ABOUT CREATING INNOVATIVE SOLUTIONS AND PUSHING THE BOUNDARIES OF WEB TECHNOLOGY.
             </p>
             <div className="hero-cta">
-              <a className="btn primary" href="#portfolio">VIEW PROJECTS</a>
-              <a className="btn ghost" href="#contact">CONTACT</a>
+              <a className="btn primary" href="/portfolio">VIEW PROJECTS</a>
+              <a className="btn ghost" href="/contact">CONTACT</a>
             </div>
           </div>
         </div>
@@ -23,4 +21,3 @@ export function Hero() {
     </section>
   )
 }
-

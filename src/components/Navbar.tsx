@@ -1,19 +1,21 @@
-// React import not needed with new JSX transform
+import { Link, useLocation } from 'react-router-dom'
 
 export function Navbar() {
+  const location = useLocation()
+  
   return (
     <header className="navbar">
       <div className="container">
-        <a href="#" className="logo">C</a>
+        <Link to="/" className="logo">C</Link>
         <nav className="nav-links">
-          <a href="#about">About</a>
-          <a href="#education">Education</a>
-          <a href="#experience">Experience</a>
-          <a href="#skills">Skills</a>
-          <a href="#certification">Certification</a>
-          <a href="#advocacy">Advocacy</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#contact">Contact</a>
+          <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link>
+          <Link to="/education" className={location.pathname === '/education' ? 'active' : ''}>Education</Link>
+          <Link to="/experience" className={location.pathname === '/experience' ? 'active' : ''}>Experience</Link>
+          <Link to="/skills" className={location.pathname === '/skills' ? 'active' : ''}>Skills</Link>
+          <Link to="/certification" className={location.pathname === '/certification' ? 'active' : ''}>Certification</Link>
+          <Link to="/advocacy" className={location.pathname === '/advocacy' ? 'active' : ''}>Advocacy</Link>
+          <Link to="/portfolio" className={location.pathname === '/portfolio' ? 'active' : ''}>Portfolio</Link>
+          <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Contact</Link>
         </nav>
       </div>
     </header>

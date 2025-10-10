@@ -1,39 +1,45 @@
-// React import not needed with new JSX transform
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
-import { ScrollAnimations } from './components/ScrollAnimations'
-import { Hero } from './sections/Hero/Hero'
-import { About } from './sections/About/About'
-import { Education } from './sections/Education/Education'
-import { Experience } from './sections/Experience'
-import { Skills } from './sections/Skills'
-import { Certification } from './sections/Certification'
-import { Advocacy } from './sections/Advocacy'
-import { Portfolio } from './sections/Portfolio'
-import { Contact } from './sections/Contact'
+import { BootSequence } from './components/BootSequence'
+import { PageLoader } from './components/PageLoader'
+import { Home } from './pages/Home'
+import { About } from './pages/About'
+import { Education } from './pages/Education'
+import { Experience } from './pages/Experience'
+import { Skills } from './pages/Skills'
+import { Certification } from './pages/Certification'
+import { Advocacy } from './pages/Advocacy'
+import { Portfolio } from './pages/Portfolio'
+import { Contact } from './pages/Contact'
 
 export default function App() {
   return (
-    <div className="app-root">
-      <div className="bg-gradient" />
-      <div className="bg-grain" />
-
-      <Navbar />
-      <ScrollAnimations>
+    <Router>
+      <div className="app-root">
+        <div className="bg-gradient" />
+        <div className="bg-grain" />
+        
+        <BootSequence />
+        <PageLoader />
+        
+        <Navbar />
         <main>
-          <Hero />
-          <About />
-          <Education />
-          <Experience />
-          <Skills />
-          <Certification />
-          <Advocacy />
-          <Portfolio />
-          <Contact />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/certification" element={<Certification />} />
+            <Route path="/advocacy" element={<Advocacy />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
         </main>
-      </ScrollAnimations>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
