@@ -25,6 +25,12 @@ export function BootSequence() {
       return
     }
 
+    // Add global function to reset boot sequence for testing
+    (window as any).resetBootSequence = () => {
+      localStorage.removeItem('bootSequenceShown')
+      window.location.reload()
+    }
+
     const timer = setInterval(() => {
       setCurrentLine((prev: number) => {
         if (prev < bootLines.length - 1) {
