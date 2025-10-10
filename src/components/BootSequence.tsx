@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export function BootSequence() {
-  const location = useLocation()
   const navigate = useNavigate()
   
   const bootLines = [
@@ -19,9 +18,11 @@ export function BootSequence() {
   ]
 
   // Check if boot sequence has already been shown
-  const hasShownBefore = typeof window !== 'undefined' && window.localStorage 
-    ? localStorage.getItem('bootSequenceShown') 
-    : null
+  let hasShownBefore = false
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const stored = localStorage.getItem('bootSequenceShown')
+    hasShownBefore = stored === 'true'
+  }
 
   // Add global function to reset boot sequence for testing
   (window as any).resetBootSequence = () => {
@@ -74,7 +75,7 @@ export function BootSequence() {
       container.style.opacity = '1'
 
       let currentIndex = 0
-      let animationTimer: NodeJS.Timeout | null = null
+      let animationTimer: number | null = null
       let isAnimationComplete = false
 
       function addLine() {
@@ -94,7 +95,7 @@ export function BootSequence() {
           const lineDiv = document.createElement('div')
           lineDiv.className = 'boot-line'
           lineDiv.innerHTML = '<span class="boot-prefix">&gt;</span><span class="boot-text">' + bootLines[currentIndex] + '</span>'
-          container.appendChild(lineDiv)
+          container?.appendChild(lineDiv)
           
           currentIndex++
           animationTimer = setTimeout(() => addLine(), 300)
@@ -114,7 +115,7 @@ export function BootSequence() {
           localStorage.setItem('bootSequenceShown', 'true')
         }
         // Hide boot sequence before redirect
-        const bootSequence = document.querySelector('.boot-sequence')
+        const bootSequence = document.querySelector('.boot-sequence') as HTMLElement
         if (bootSequence) {
           bootSequence.style.opacity = '0'
           bootSequence.style.transition = 'opacity 0.5s ease-out'
@@ -137,7 +138,7 @@ export function BootSequence() {
       console.error('BootSequence useEffect error:', error)
       ;(window as any).bootSequenceActive = null
     }
-  }, [navigate, bootLines, hasShownBefore])
+  }, [navigate, bootLines])
 
   // If boot sequence has already been shown, don't show anything
   if (hasShownBefore) {

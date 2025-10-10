@@ -23,14 +23,14 @@ export function usePageAnimation() {
       
       // Check if boot sequence is still visible (including opacity check)
       const isBootSequenceActive = bootSequence && 
-        bootSequence.style.display !== 'none' && 
-        bootSequence.offsetParent !== null &&
+        (bootSequence as HTMLElement).style.display !== 'none' && 
+        (bootSequence as HTMLElement).offsetParent !== null &&
         getComputedStyle(bootSequence).opacity !== '0'
       
       // Check if page loader is still visible (including opacity check)
       const isPageLoaderActive = pageLoader && 
-        pageLoader.style.display !== 'none' && 
-        pageLoader.offsetParent !== null &&
+        (pageLoader as HTMLElement).style.display !== 'none' && 
+        (pageLoader as HTMLElement).offsetParent !== null &&
         getComputedStyle(pageLoader).opacity !== '0'
       
       // Only start animations when BOTH are completely gone
