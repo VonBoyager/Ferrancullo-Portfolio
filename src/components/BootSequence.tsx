@@ -18,12 +18,22 @@ export function BootSequence() {
   ]
 
   useEffect(() => {
+    // Check if boot sequence has already been shown
+    const hasShownBefore = localStorage.getItem('bootSequenceShown')
+    if (hasShownBefore) {
+      setIsVisible(false)
+      return
+    }
+
     const timer = setInterval(() => {
       setCurrentLine((prev: number) => {
         if (prev < bootLines.length - 1) {
           return prev + 1
         } else {
-          setTimeout(() => setIsVisible(false), 1000)
+          setTimeout(() => {
+            setIsVisible(false)
+            localStorage.setItem('bootSequenceShown', 'true')
+          }, 1000)
           return prev
         }
       })
