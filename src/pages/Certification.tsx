@@ -1,4 +1,5 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
+import { Footer } from '../components/Footer'
 
 export function Certification() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -41,6 +42,7 @@ export function Certification() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </section>
   )

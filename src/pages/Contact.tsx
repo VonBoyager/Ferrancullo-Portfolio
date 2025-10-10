@@ -1,4 +1,5 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
+import { Footer } from '../components/Footer'
 
 export function Contact() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -34,6 +35,7 @@ export function Contact() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </section>
   )

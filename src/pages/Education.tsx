@@ -1,4 +1,5 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
+import { Footer } from '../components/Footer'
 
 export function Education() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -51,6 +52,7 @@ export function Education() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </section>
   )

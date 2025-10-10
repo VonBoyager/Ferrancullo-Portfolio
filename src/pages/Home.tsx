@@ -1,4 +1,6 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
+import { Link } from 'react-router-dom'
+import { Footer } from '../components/Footer'
 
 export function Home() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -9,18 +11,19 @@ export function Home() {
         <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
           <div className="hero-content">
             <h1>
-              CED - FULL STACK DEVELOPER
+              CED - DATA SCIENTIST
               <span className="fade"> & DIGITAL ARTIST</span>
             </h1>
             <p className="lede">
               PASSIONATE ABOUT CREATING INNOVATIVE SOLUTIONS AND PUSHING THE BOUNDARIES OF WEB TECHNOLOGY.
             </p>
             <div className="hero-cta">
-              <a className="btn primary" href="/portfolio">VIEW PROJECTS</a>
-              <a className="btn ghost" href="/contact">CONTACT</a>
+              <Link className="btn primary" to="/portfolio">VIEW PROJECTS</Link>
+              <Link className="btn ghost" to="/contact">CONTACT</Link>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </section>
   )
