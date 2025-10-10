@@ -1,6 +1,5 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
 import { Link } from 'react-router-dom'
-import { Footer } from '../components/Footer'
 
 export function Home() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -23,7 +22,6 @@ export function Home() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </section>
   )

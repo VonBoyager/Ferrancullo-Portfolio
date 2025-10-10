@@ -1129,73 +1129,23 @@ body:has(.boot-sequence) .footer {
   }
 }
 
-/* Footer Styles */
-.footer {
-  margin-top: var(--space-6);
-  padding: var(--space-3) 0;
-  border-top: 1px solid var(--terminal-green);
-  background: var(--bg-soft);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: footerSlideIn 0.6s ease-out 0.4s forwards;
-}
-
-.footer-enter {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: footerSlideIn 0.6s ease-out 0.4s forwards;
-}
-
-.footer-exit {
-  opacity: 1;
-  transform: translateY(0);
-  animation: footerSlideOut 0.3s ease-in forwards;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-}
-
-.footer-text {
-  color: var(--terminal-dim);
-  font-size: 0.8em;
+/* Integrated Footer in Background */
+.app-root::after {
+  content: "ced@portfolio:~$ _\n# © 2024 CEDRIC FERRANCULLO | TERMINAL PORTFOLIO v1.0";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  color: var(--terminal-green);
   font-family: var(--font-mono);
-}
-
-.footer-left {
-  flex: 1;
-}
-
-.footer-right {
-  flex: 1;
-  text-align: right;
-}
-
-@keyframes footerSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes footerSlideOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
+  font-size: 0.7em;
+  white-space: pre-line;
+  border-top: 1px dashed var(--terminal-green);
+  opacity: 0.7;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Grid Layouts */

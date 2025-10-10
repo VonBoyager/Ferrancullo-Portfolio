@@ -1,6 +1,5 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
 import { useState } from 'react'
-import { Footer } from '../components/Footer'
 
 export function Portfolio() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -69,7 +68,6 @@ export function Portfolio() {
           </div>
         </div>
       )}
-      <Footer />
     </section>
   )
 }

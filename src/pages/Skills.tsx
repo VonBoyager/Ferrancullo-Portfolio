@@ -1,5 +1,4 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
-import { Footer } from '../components/Footer'
 
 export function Skills() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -38,7 +37,6 @@ export function Skills() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </section>
   )

@@ -1,5 +1,4 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
-import { Footer } from '../components/Footer'
 
 export function Advocacy() {
   const { isVisible, isExiting } = usePageAnimation()
@@ -24,7 +23,6 @@ export function Advocacy() {
             <p>"AND THE UNIVERSE SAID I LOVE YOU BECAUSE YOU ARE LOVE."</p>
           </div>
         </div>
-        <Footer />
       </div>
     </section>
   )
