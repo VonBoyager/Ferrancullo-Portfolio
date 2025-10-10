@@ -1,5 +1,4 @@
 // React import not needed with new JSX transform
-import './Hero.css'
 
 export function Hero() {
   return (
@@ -8,15 +7,15 @@ export function Hero() {
         <div className="panel panel--inset">
           <div className="hero-content">
             <h1>
-              Minimal. Monochrome.
-              <span className="fade"> Modern.</span>
+              CED - FULL STACK DEVELOPER
+              <span className="fade"> & DIGITAL ARTIST</span>
             </h1>
             <p className="lede">
-              I craft fast, elegant web experiences focused on clarity and feel.
+              PASSIONATE ABOUT CREATING INNOVATIVE SOLUTIONS AND PUSHING THE BOUNDARIES OF WEB TECHNOLOGY.
             </p>
             <div className="hero-cta">
-              <a className="btn primary" href="#portfolio">See Work</a>
-              <a className="btn ghost" href="#contact">Get in Touch</a>
+              <a className="btn primary" href="#portfolio">VIEW PROJECTS</a>
+              <a className="btn ghost" href="#contact">CONTACT</a>
             </div>
           </div>
         </div>
