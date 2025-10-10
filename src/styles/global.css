@@ -1042,7 +1042,8 @@ body:has(.boot-sequence) .footer {
   height: 100%;
   background: linear-gradient(90deg, var(--terminal-green), var(--accent-1));
   width: 0%;
-  animation: progressFill 3s ease-in-out infinite;
+  animation: progressFill 2s ease-in-out infinite;
+  border-radius: 2px;
 }
 
 .popup-footer {
