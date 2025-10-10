@@ -1,33 +1,35 @@
-/* CSS variables define an avant-garde experimental palette */
+/* Terminal color system */
 :root {
-  /* Avant-garde color system */
-  --bg: #000000;           /* pure black void */
-  --bg-soft: #0a0a0a;      /* deep space */
-  --fg: #ff00ff;           /* electric magenta */
-  --fg-dim: #00ffff;       /* electric cyan */
-  --border: #ffff00;       /* electric yellow */
+  /* Terminal palette */
+  --bg: #0a0a0a;           /* terminal black */
+  --bg-soft: #111111;      /* terminal dark */
+  --fg: #00ff00;           /* terminal green */
+  --fg-dim: #00aa00;       /* dim green */
+  --border: #00ff00;       /* terminal border */
   --white: #ffffff;
   --black: #000000;
-  --accent-1: #ff0080;     /* hot pink */
-  --accent-2: #8000ff;     /* electric purple */
-  --accent-3: #00ff80;     /* electric green */
+  --accent-1: #ffff00;     /* terminal yellow */
+  --accent-2: #00ffff;     /* terminal cyan */
+  --accent-3: #ff00ff;     /* terminal magenta */
+  --cursor: #00ff00;       /* blinking cursor */
+  --prompt: #00ffff;       /* prompt color */
 
-  /* Experimental geometry */
+  /* Terminal geometry */
   --radius: 0px;
   --radius-sm: 0px;
-  --shadow: 0 0 20px currentColor;
+  --shadow: 0 0 10px currentColor;
 
-  /* Asymmetric spacing */
-  --space-1: 3px;
-  --space-2: 7px;
-  --space-3: 13px;
-  --space-4: 21px;
-  --space-5: 34px;
-  --space-6: 55px;
+  /* Terminal spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
   --max-w: 100vw;
 }
 
-/* Avant-garde base reset */
+/* Terminal base reset */
 * { 
   box-sizing: border-box; 
   margin: 0;
@@ -36,36 +38,55 @@
 html, body, #app { 
   height: 100%; 
   overflow-x: hidden;
+  font-family: "JetBrains Mono", "Courier New", monospace;
 }
 html, body {
   background: var(--bg);
   color: var(--fg);
-  font-family: "JetBrains Mono", monospace;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
-  text-shadow: 0 0 10px currentColor;
+  text-shadow: 0 0 5px currentColor;
   scroll-behavior: auto;
-  cursor: crosshair;
+  cursor: text;
+  line-height: 1.2;
 }
 
-/* Avant-garde animation keyframes */
-@keyframes dataStream {
-  0% {
-    transform: translateY(-100vh) rotate(45deg);
-    opacity: 0;
-  }
-  50% {
+/* Terminal animation keyframes */
+@keyframes blink {
+  0%, 50% {
     opacity: 1;
   }
-  100% {
-    transform: translateY(100vh) rotate(45deg);
+  51%, 100% {
     opacity: 0;
   }
 }
 
-@keyframes matrixRain {
+@keyframes typewriter {
   0% {
-    transform: translateY(-100%);
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes terminalGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor;
+  }
+}
+
+@keyframes dataStream {
+  0% {
+    transform: translateY(-100vh);
     opacity: 0;
   }
   10% {
@@ -80,178 +101,142 @@ html, body {
   }
 }
 
-@keyframes glitch {
-  0%, 100% {
-    transform: translate(0) skew(0deg);
-    filter: hue-rotate(0deg);
+@keyframes scanline {
+  0% {
+    transform: translateY(-100vh);
   }
-  10% {
-    transform: translate(-2px, 2px) skew(1deg);
-    filter: hue-rotate(90deg);
-  }
-  20% {
-    transform: translate(2px, -2px) skew(-1deg);
-    filter: hue-rotate(180deg);
-  }
-  30% {
-    transform: translate(-1px, 1px) skew(0.5deg);
-    filter: hue-rotate(270deg);
-  }
-  40% {
-    transform: translate(1px, -1px) skew(-0.5deg);
-    filter: hue-rotate(360deg);
+  100% {
+    transform: translateY(100vh);
   }
 }
 
-@keyframes neonPulse {
-  0%, 100% {
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor,
-      0 0 20px currentColor;
-  }
-  50% {
-    text-shadow: 
-      0 0 2px currentColor,
-      0 0 5px currentColor,
-      0 0 8px currentColor,
-      0 0 12px currentColor;
-  }
-}
-
-@keyframes chaos {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-    filter: hue-rotate(0deg);
-  }
-  25% {
-    transform: rotate(90deg) scale(1.1);
-    filter: hue-rotate(90deg);
-  }
-  50% {
-    transform: rotate(180deg) scale(0.9);
-    filter: hue-rotate(180deg);
-  }
-  75% {
-    transform: rotate(270deg) scale(1.05);
-    filter: hue-rotate(270deg);
-  }
-}
-
-/* Avant-garde background system */
+/* Terminal background system */
 .app-root { 
   position: relative; 
   min-height: 100vh; 
   overflow: hidden;
-  background: #000000;
+  background: var(--bg);
+  border: 2px solid var(--border);
 }
 .bg-gradient {
   position: fixed; 
   inset: 0; 
   z-index: -2;
   background: 
-    conic-gradient(from 0deg at 20% 30%, #ff00ff, #00ffff, #ffff00, #ff0080, #8000ff, #00ff80, #ff00ff),
-    radial-gradient(circle at 50% 50%, transparent 0%, #000000 70%);
-  animation: chaos 20s linear infinite;
+    repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 255, 0, 0.03) 1px, rgba(0, 255, 0, 0.03) 2px),
+    repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0, 255, 0, 0.02) 1px, rgba(0, 255, 0, 0.02) 2px);
 }
 .bg-grain {
   position: fixed; 
   inset: 0; 
   z-index: -1;
   background: 
-    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 0, 255, 0.03) 2px, rgba(255, 0, 255, 0.03) 4px),
-    repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
-  animation: matrixRain 3s linear infinite;
+    repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0, 255, 0, 0.1) 8px, rgba(0, 255, 0, 0.1) 9px);
+  animation: scanline 3s linear infinite;
 }
 
-/* Avant-garde typography */
+/* Terminal typography */
 h1, h2, h3 { 
-  line-height: 0.8; 
+  line-height: 1.2; 
   margin: 0; 
-  font-weight: 900; 
-  font-family: "JetBrains Mono", monospace;
+  font-weight: 400; 
+  font-family: "JetBrains Mono", "Courier New", monospace;
   text-transform: uppercase;
-  animation: neonPulse 2s ease-in-out infinite;
+  animation: terminalGlow 2s ease-in-out infinite;
   position: relative;
 }
 h1 { 
-  font-size: clamp(60px, 15vw, 120px); 
+  font-size: clamp(24px, 6vw, 48px); 
   letter-spacing: 0.1em; 
-  transform: rotate(-2deg);
-  color: #ff00ff;
+  color: var(--fg);
   text-shadow: 
-    0 0 5px #ff00ff,
-    0 0 10px #ff00ff,
-    0 0 20px #ff00ff,
-    0 0 40px #ff00ff;
+    0 0 5px currentColor,
+    0 0 10px currentColor;
+}
+h1::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: var(--cursor);
 }
 h2 { 
-  font-size: clamp(30px, 8vw, 60px); 
-  letter-spacing: 0.15em; 
-  transform: rotate(1deg);
-  color: #00ffff;
+  font-size: clamp(18px, 4vw, 32px); 
+  letter-spacing: 0.1em; 
+  color: var(--accent-2);
   text-shadow: 
-    0 0 5px #00ffff,
-    0 0 10px #00ffff,
-    0 0 20px #00ffff;
+    0 0 5px currentColor;
 }
 h3 { 
-  font-size: clamp(20px, 5vw, 40px); 
-  letter-spacing: 0.2em; 
-  transform: rotate(-1deg);
-  color: #ffff00;
+  font-size: clamp(14px, 3vw, 24px); 
+  letter-spacing: 0.1em; 
+  color: var(--accent-1);
   text-shadow: 
-    0 0 5px #ffff00,
-    0 0 10px #ffff00;
+    0 0 3px currentColor;
 }
 p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
 .lede { font-size: clamp(16px, 1.6vw, 20px); color: #2a2a2a; font-weight: 600; }
 .fade { color: #555555; font-weight: 700; }
 
-/* Navbar */
+/* Terminal navbar */
 .navbar {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(255,255,255,0.04);
-  border-bottom: 2px solid var(--border);
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
-  backdrop-filter: blur(8px) saturate(120%);
-  animation: slideInFromTop 0.8s ease-out;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  font-family: "JetBrains Mono", monospace;
 }
-.navbar > .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
+.navbar > .container { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: var(--space-3); 
+  padding: var(--space-2) var(--space-4);
+  background: repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0, 255, 0, 0.1) 1px, rgba(0, 255, 0, 0.1) 2px);
+}
 .logo { 
-  font-weight: 900; 
-  letter-spacing: 0.12em; 
+  font-weight: 400; 
+  letter-spacing: 0.1em; 
   text-transform: uppercase; 
-  transition: all 0.3s ease;
   text-decoration: none;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s ease-in-out infinite;
-  font-size: 1.5em;
+  color: var(--prompt);
+  font-size: 1.2em;
+  text-shadow: 0 0 5px currentColor;
+}
+.logo::before {
+  content: 'user@portfolio:~$ ';
+  color: var(--accent-2);
 }
 .logo:hover {
-  animation: gradientShift 0.5s ease-in-out infinite, glitch 0.3s ease-in-out;
-  transform: scale(1.1);
+  color: var(--fg);
+  text-shadow: 0 0 10px currentColor;
 }
-.nav-links { display: flex; gap: var(--space-3); }
+.nav-links { 
+  display: flex; 
+  gap: var(--space-2); 
+  font-family: "JetBrains Mono", monospace;
+}
 .nav-links a { 
-  color: var(--fg); 
+  color: var(--fg-dim); 
   text-decoration: none; 
-  border-bottom: 2px solid transparent; 
   transition: all 0.3s ease; 
   position: relative;
+  font-size: 0.9em;
+  padding: 2px 4px;
+  border: 1px solid transparent;
+}
+.nav-links a::before {
+  content: './';
+  color: var(--accent-2);
 }
 .nav-links a:hover { 
-  border-bottom-color: var(--fg); 
-  transform: translateY(-2px);
+  color: var(--fg);
+  border-color: var(--border);
+  text-shadow: 0 0 5px currentColor;
 }
 .nav-links a.active { 
-  border-bottom-color: var(--fg); 
-  font-weight: 600; 
+  color: var(--accent-1);
+  border-color: var(--accent-1);
+  text-shadow: 0 0 5px currentColor;
 }
 
 /* Layout */
