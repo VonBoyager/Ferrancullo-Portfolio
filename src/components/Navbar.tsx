@@ -4,7 +4,7 @@ export function Navbar() {
   return (
     <header className="navbar">
       <div className="container">
-        <a href="#" className="logo">Ced</a>
+        <a href="#" className="logo">C</a>
         <nav className="nav-links">
           <a href="#about">About</a>
           <a href="#education">Education</a>

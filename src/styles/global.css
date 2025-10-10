@@ -111,6 +111,18 @@ html, body {
   }
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Background layers */
 .app-root { position: relative; min-height: 100%; overflow-x: hidden; }
 .bg-gradient {
@@ -168,13 +180,22 @@ p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
 }
 .navbar > .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
 .logo { 
-  font-weight: 700; 
+  font-weight: 900; 
   letter-spacing: 0.12em; 
   text-transform: uppercase; 
   transition: all 0.3s ease;
+  text-decoration: none;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+  font-size: 1.5em;
 }
 .logo:hover {
-  animation: glitch 0.3s ease-in-out;
+  animation: gradientShift 0.5s ease-in-out infinite, glitch 0.3s ease-in-out;
+  transform: scale(1.1);
 }
 .nav-links { display: flex; gap: var(--space-3); }
 .nav-links a { 
