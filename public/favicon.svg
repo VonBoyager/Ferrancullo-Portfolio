@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Terminal background -->
+  <rect width="32" height="32" fill="#000000"/>
+  
+  <!-- Terminal border -->
+  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#39ff14" stroke-width="1"/>
+  
+  <!-- Terminal scanlines effect -->
+  <defs>
+    <pattern id="scanlines" x="0" y="0" width="32" height="2" patternUnits="userSpaceOnUse">
+      <rect width="32" height="1" fill="#39ff14" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="32" height="32" fill="url(#scanlines)"/>
+  
+  <!-- Terminal "C" letter -->
+  <text x="16" y="22" font-family="monospace" font-size="16" font-weight="bold" 
+        text-anchor="middle" fill="#39ff14" stroke="#39ff14" stroke-width="0.5">
+    C
+  </text>
+  
+  <!-- Terminal cursor -->
+  <rect x="20" y="18" width="2" height="4" fill="#39ff14" opacity="0.8"/>
+</svg>
