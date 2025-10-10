@@ -1,170 +1,209 @@
-/* CSS variables define a monochrome palette and spacing scale */
+/* CSS variables define an avant-garde experimental palette */
 :root {
-  /* Brutalist black palette */
-  --bg: #0a0a0a;           /* page background */
-  --bg-soft: #111111;      /* soft panel alt */
-  --fg: #f2f2f2;           /* primary text */
-  --fg-dim: #bbbbbb;       /* secondary text */
-  --border: rgba(255,255,255,0.18);
+  /* Avant-garde color system */
+  --bg: #000000;           /* pure black void */
+  --bg-soft: #0a0a0a;      /* deep space */
+  --fg: #ff00ff;           /* electric magenta */
+  --fg-dim: #00ffff;       /* electric cyan */
+  --border: #ffff00;       /* electric yellow */
   --white: #ffffff;
   --black: #000000;
+  --accent-1: #ff0080;     /* hot pink */
+  --accent-2: #8000ff;     /* electric purple */
+  --accent-3: #00ff80;     /* electric green */
 
-  /* Brutalist geometry */
+  /* Experimental geometry */
   --radius: 0px;
   --radius-sm: 0px;
-  --shadow: 4px 4px 0 rgba(255,255,255,0.06);
+  --shadow: 0 0 20px currentColor;
 
-  /* Spacing */
-  --space-1: 6px;
-  --space-2: 10px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 36px;
-  --space-6: 56px;
-  --max-w: 1120px;
+  /* Asymmetric spacing */
+  --space-1: 3px;
+  --space-2: 7px;
+  --space-3: 13px;
+  --space-4: 21px;
+  --space-5: 34px;
+  --space-6: 55px;
+  --max-w: 100vw;
 }
 
-/* Base reset */
-* { box-sizing: border-box; }
-html, body, #app { height: 100%; }
-html, body {
+/* Avant-garde base reset */
+* { 
+  box-sizing: border-box; 
   margin: 0;
   padding: 0;
+}
+html, body, #app { 
+  height: 100%; 
+  overflow-x: hidden;
+}
+html, body {
   background: var(--bg);
   color: var(--fg);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.4); /* subtle diffusion */
-  scroll-behavior: smooth;
+  font-family: "JetBrains Mono", monospace;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-shadow: 0 0 10px currentColor;
+  scroll-behavior: auto;
+  cursor: crosshair;
 }
 
-/* Animation keyframes */
-@keyframes fadeInUp {
-  from {
+/* Avant-garde animation keyframes */
+@keyframes dataStream {
+  0% {
+    transform: translateY(-100vh) rotate(45deg);
     opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromTop {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes matrixRain {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
   }
 }
 
 @keyframes glitch {
   0%, 100% {
-    transform: translate(0);
+    transform: translate(0) skew(0deg);
+    filter: hue-rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, 2px) skew(1deg);
+    filter: hue-rotate(90deg);
   }
   20% {
-    transform: translate(-2px, 2px);
+    transform: translate(2px, -2px) skew(-1deg);
+    filter: hue-rotate(180deg);
+  }
+  30% {
+    transform: translate(-1px, 1px) skew(0.5deg);
+    filter: hue-rotate(270deg);
   }
   40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
+    transform: translate(1px, -1px) skew(-0.5deg);
+    filter: hue-rotate(360deg);
   }
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor,
+      0 0 12px currentColor;
   }
 }
 
-/* Background layers */
-.app-root { position: relative; min-height: 100%; overflow-x: hidden; }
+@keyframes chaos {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9);
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.05);
+    filter: hue-rotate(270deg);
+  }
+}
+
+/* Avant-garde background system */
+.app-root { 
+  position: relative; 
+  min-height: 100vh; 
+  overflow: hidden;
+  background: #000000;
+}
 .bg-gradient {
-  /* Y2K Brutalist background */
-  position: fixed; inset: 0; z-index: -2;
+  position: fixed; 
+  inset: 0; 
+  z-index: -2;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255, 255, 0, 0.05) 0%, transparent 50%),
-    linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #0f0f0f 50%, #1a1a1a 75%, #0a0a0a 100%);
+    conic-gradient(from 0deg at 20% 30%, #ff00ff, #00ffff, #ffff00, #ff0080, #8000ff, #00ff80, #ff00ff),
+    radial-gradient(circle at 50% 50%, transparent 0%, #000000 70%);
+  animation: chaos 20s linear infinite;
 }
 .bg-grain {
-  position: fixed; inset: -10vmax; z-index: -1;
-  background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='y2k'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 .01 .02 .04 .06 .08 .1 .12 .14 .16 .18 .2 .22 1'/></feComponentTransfer><feBlend mode='screen'/></filter><rect width='100%' height='100%' filter='url(%23y2k)'/></svg>");
-  opacity: 0.15; mix-blend-mode: screen; pointer-events: none;
+  position: fixed; 
+  inset: 0; 
+  z-index: -1;
+  background: 
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 0, 255, 0.03) 2px, rgba(255, 0, 255, 0.03) 4px),
+    repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
+  animation: matrixRain 3s linear infinite;
 }
 
-/* Typography */
+/* Avant-garde typography */
 h1, h2, h3 { 
-  line-height: 1.1; 
-  margin: 0 0 var(--space-3); 
-  text-wrap: balance; 
-  font-weight: 800; 
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  line-height: 0.8; 
+  margin: 0; 
+  font-weight: 900; 
+  font-family: "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  animation: neonPulse 2s ease-in-out infinite;
+  position: relative;
 }
 h1 { 
-  font-size: clamp(40px, 7vw, 80px); 
-  letter-spacing: -0.01em; 
-  font-weight: 900;
-  text-transform: uppercase;
+  font-size: clamp(60px, 15vw, 120px); 
+  letter-spacing: 0.1em; 
+  transform: rotate(-2deg);
+  color: #ff00ff;
+  text-shadow: 
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff,
+    0 0 40px #ff00ff;
 }
 h2 { 
-  font-size: clamp(24px, 3.6vw, 36px); 
-  text-transform: uppercase; 
-  letter-spacing: 0.08em; 
-  font-weight: 800;
+  font-size: clamp(30px, 8vw, 60px); 
+  letter-spacing: 0.15em; 
+  transform: rotate(1deg);
+  color: #00ffff;
+  text-shadow: 
+    0 0 5px #00ffff,
+    0 0 10px #00ffff,
+    0 0 20px #00ffff;
 }
 h3 { 
-  font-size: 22px; 
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: clamp(20px, 5vw, 40px); 
+  letter-spacing: 0.2em; 
+  transform: rotate(-1deg);
+  color: #ffff00;
+  text-shadow: 
+    0 0 5px #ffff00,
+    0 0 10px #ffff00;
 }
 p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
 .lede { font-size: clamp(16px, 1.6vw, 20px); color: #2a2a2a; font-weight: 600; }
