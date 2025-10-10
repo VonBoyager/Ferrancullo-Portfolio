@@ -7,33 +7,52 @@ export function PageLoader() {
   const location = useLocation()
 
   useEffect(() => {
-    setIsLoading(true)
-    setLoadingText('LOADING PAGE...')
+    // Check if this is the initial load (boot sequence hasn't been shown yet)
+    const hasShownBoot = localStorage.getItem('bootSequenceShown')
     
-    const loadingMessages = [
-      'ACCESSING DATABASE...',
-      'LOADING CONTENT...',
-      'RENDERING INTERFACE...',
-      'ESTABLISHING CONNECTION...',
-      'VERIFYING DATA INTEGRITY...',
-      'LOADING COMPLETE.'
-    ]
+    // Don't show page loader during initial boot sequence
+    if (!hasShownBoot) {
+      return
+    }
 
-    let messageIndex = 0
-    const messageTimer = setInterval(() => {
-      if (messageIndex < loadingMessages.length - 1) {
-        messageIndex++
-        setLoadingText(loadingMessages[messageIndex])
-      } else {
-        clearInterval(messageTimer)
-        setTimeout(() => {
-          setIsLoading(false)
-        }, 500)
-      }
-    }, 200)
+    // Check if this is a manual navigation (not from boot sequence redirect)
+    const isManualNavigation = sessionStorage.getItem('manualNavigation')
+    
+    // Only show page loader for manual navigation (user clicking links)
+    if (isManualNavigation) {
+      setIsLoading(true)
+      setLoadingText('LOADING PAGE...')
+      
+      const loadingMessages = [
+        'ACCESSING DATABASE...',
+        'LOADING CONTENT...',
+        'RENDERING INTERFACE...',
+        'ESTABLISHING CONNECTION...',
+        'VERIFYING DATA INTEGRITY...',
+        'LOADING COMPLETE.'
+      ]
 
-    return () => clearInterval(messageTimer)
+      let messageIndex = 0
+      const messageTimer = setInterval(() => {
+        if (messageIndex < loadingMessages.length - 1) {
+          messageIndex++
+          setLoadingText(loadingMessages[messageIndex])
+        } else {
+          clearInterval(messageTimer)
+          setTimeout(() => {
+            setIsLoading(false)
+            sessionStorage.removeItem('manualNavigation')
+          }, 500)
+        }
+      }, 200)
+
+      return () => clearInterval(messageTimer)
+    } else {
+      // If not manual navigation, don't show page loader
+      setIsLoading(false)
+    }
   }, [location.pathname])
+
 
   if (!isLoading) return null
 

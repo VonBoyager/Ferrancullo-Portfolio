@@ -1,49 +1,31 @@
+import { usePageAnimation } from '../hooks/usePageAnimation'
+
 export function Advocacy() {
+  const { isVisible, isExiting } = usePageAnimation()
+
   return (
-    <section className="section advocacy" aria-label="Advocacy">
+    <section className={`section advocacy ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="Advocacy">
       <div className="container">
-        <div className="panel panel--inset">
-          <h2>ADVOCACY & COMMUNITY</h2>
-          <div className="grid">
-            <div className="card">
-              <h3>OPEN SOURCE CONTRIBUTOR</h3>
-              <div className="organization">GITHUB COMMUNITY</div>
-              <div className="period">2022 - PRESENT</div>
-              <div className="description">
-                ACTIVE CONTRIBUTOR TO VARIOUS OPEN SOURCE PROJECTS. 
-                FOCUSED ON IMPROVING DEVELOPER EXPERIENCE AND DOCUMENTATION.
-              </div>
-            </div>
-            <div className="card">
-              <h3>TECH MENTOR</h3>
-              <div className="organization">CODING BOOTCAMP</div>
-              <div className="period">2023 - PRESENT</div>
-              <div className="description">
-                MENTORING ASPIRING DEVELOPERS IN WEB DEVELOPMENT FUNDAMENTALS, 
-                REACT, AND CAREER GUIDANCE.
-              </div>
-            </div>
-            <div className="card">
-              <h3>COMMUNITY SPEAKER</h3>
-              <div className="organization">LOCAL TECH MEETUPS</div>
-              <div className="period">2022 - PRESENT</div>
-              <div className="description">
-                REGULAR SPEAKER AT TECH MEETUPS AND CONFERENCES. 
-                SHARING KNOWLEDGE ABOUT MODERN WEB DEVELOPMENT AND BEST PRACTICES.
-              </div>
-            </div>
-            <div className="card">
-              <h3>DIVERSITY & INCLUSION ADVOCATE</h3>
-              <div className="organization">TECH FOR GOOD</div>
-              <div className="period">2021 - PRESENT</div>
-              <div className="description">
-                PROMOTING DIVERSITY IN TECH THROUGH WORKSHOPS, 
-                SCHOLARSHIPS, AND COMMUNITY OUTREACH PROGRAMS.
-              </div>
-            </div>
+        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
+          <h2>ADVOCACY</h2>
+          <div className="minecraft-poem">
+            <p>"AND THE UNIVERSE SAID I LOVE YOU"</p>
+            <p>"AND THE UNIVERSE SAID YOU HAVE PLAYED THE GAME WELL"</p>
+            <p>"AND THE UNIVERSE SAID EVERYTHING YOU NEED IS WITHIN YOU"</p>
+            <p>"AND THE UNIVERSE SAID YOU ARE STRONGER THAN YOU KNOW"</p>
+            <p>"AND THE UNIVERSE SAID YOU ARE THE DAYLIGHT"</p>
+            <p>"AND THE UNIVERSE SAID YOU ARE THE NIGHT"</p>
+            <p>"THE UNIVERSE SAID THE DARKNESS YOU FIGHT IS WITHIN YOU"</p>
+            <p>"THE UNIVERSE SAID THE LIGHT YOU SEEK IS WITHIN YOU"</p>
+            <p>"AND THE UNIVERSE SAID YOU ARE NOT ALONE"</p>
+            <p>"AND THE UNIVERSE SAID YOU ARE NOT SEPARATE FROM EVERY OTHER THING"</p>
+            <p>"AND THE UNIVERSE SAID YOU ARE THE UNIVERSE TASTING ITSELF, TALKING TO ITSELF, READING ITS OWN CODE"</p>
+            <p>"AND THE UNIVERSE SAID I LOVE YOU BECAUSE YOU ARE LOVE."</p>
           </div>
         </div>
       </div>
     </section>
   )
 }
+
+

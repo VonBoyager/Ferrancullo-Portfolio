@@ -1,44 +1,42 @@
+import { usePageAnimation } from '../hooks/usePageAnimation'
+
 export function Certification() {
+  const { isVisible, isExiting } = usePageAnimation()
+
   return (
-    <section className="section certification" aria-label="Certification">
+    <section className={`section certification ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="Certification">
       <div className="container">
-        <div className="panel panel--inset">
+        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
           <h2>CERTIFICATIONS & TRAINING</h2>
           <div className="grid">
-            <div className="card">
-              <h3>AWS CERTIFIED SOLUTIONS ARCHITECT</h3>
-              <div className="issuer">AMAZON WEB SERVICES</div>
-              <div className="date">2023</div>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>PMI PROJECT MANAGEMENT READY</h3>
+              <div className="issuer">PROJECT MANAGEMENT INSTITUTE</div>
+              <div className="date">MARCH 12, 2025</div>
               <div className="description">
-                COMPREHENSIVE KNOWLEDGE OF AWS SERVICES, ARCHITECTURE BEST PRACTICES, 
-                AND CLOUD SECURITY IMPLEMENTATION.
+                CERTIFICATION IN PROJECT MANAGEMENT FUNDAMENTALS, INCLUDING PROJECT 
+                PLANNING, EXECUTION, AND MONITORING. DEMONSTRATES PROFICIENCY IN 
+                PROJECT MANAGEMENT METHODOLOGIES AND BEST PRACTICES.
               </div>
             </div>
-            <div className="card">
-              <h3>REACT DEVELOPER CERTIFICATION</h3>
-              <div className="issuer">META</div>
-              <div className="date">2023</div>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>CCNA INTRODUCTION TO NETWORKS</h3>
+              <div className="issuer">CISCO SYSTEMS</div>
+              <div className="date">JULY 20, 2024</div>
               <div className="description">
-                ADVANCED REACT CONCEPTS INCLUDING HOOKS, CONTEXT, STATE MANAGEMENT, 
-                AND PERFORMANCE OPTIMIZATION.
+                CISCO CERTIFIED NETWORK ASSOCIATE CERTIFICATION COVERING NETWORKING 
+                FUNDAMENTALS, ROUTING, SWITCHING, AND NETWORK SECURITY. COMPREHENSIVE 
+                UNDERSTANDING OF NETWORK INFRASTRUCTURE AND PROTOCOLS.
               </div>
             </div>
-            <div className="card">
-              <h3>NODE.JS CERTIFIED DEVELOPER</h3>
-              <div className="issuer">OPENJS FOUNDATION</div>
-              <div className="date">2022</div>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>IT SPECIALIST - PYTHON</h3>
+              <div className="issuer">MICROSOFT</div>
+              <div className="date">JULY 14, 2024</div>
               <div className="description">
-                PROFICIENCY IN NODE.JS RUNTIME, ASYNC PROGRAMMING, 
-                AND SERVER-SIDE DEVELOPMENT PATTERNS.
-              </div>
-            </div>
-            <div className="card">
-              <h3>DOCKER CERTIFIED ASSOCIATE</h3>
-              <div className="issuer">DOCKER INC.</div>
-              <div className="date">2022</div>
-              <div className="description">
-                CONTAINERIZATION, ORCHESTRATION, AND DEVOPS PRACTICES 
-                USING DOCKER AND KUBERNETES.
+                MICROSOFT IT SPECIALIST CERTIFICATION IN PYTHON PROGRAMMING. COVERS 
+                PYTHON FUNDAMENTALS, DATA STRUCTURES, ALGORITHMS, AND APPLICATION 
+                DEVELOPMENT. VALIDATES PROFICIENCY IN PYTHON PROGRAMMING CONCEPTS.
               </div>
             </div>
           </div>
@@ -47,3 +45,5 @@ export function Certification() {
     </section>
   )
 }
+
+

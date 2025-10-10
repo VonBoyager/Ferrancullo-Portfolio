@@ -1,36 +1,38 @@
+import { usePageAnimation } from '../hooks/usePageAnimation'
+
 export function Skills() {
+  const { isVisible, isExiting } = usePageAnimation()
+
   return (
-    <section className="section skills" aria-label="Skills">
+    <section className={`section skills ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="Skills">
       <div className="container">
-        <div className="panel panel--inset">
+        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
           <h2>TECHNICAL SKILLS</h2>
           <div className="grid">
-            <div className="card">
-              <h3>FRONTEND DEVELOPMENT</h3>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>PROGRAMMING LANGUAGES</h3>
               <div className="description">
-                REACT, TYPESCRIPT, JAVASCRIPT, HTML5, CSS3, SASS, 
-                NEXT.JS, VUE.JS, RESPONSIVE DESIGN
+                REACT, NODE.JS, PYTHON, JAVA, C++
               </div>
             </div>
-            <div className="card">
-              <h3>BACKEND DEVELOPMENT</h3>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>VIDEO EDITING</h3>
               <div className="description">
-                NODE.JS, EXPRESS, PYTHON, DJANGO, POSTGRESQL, MONGODB, 
-                RESTFUL APIs, GRAPHQL, MICROSERVICES
+                PREMIERE PRO, AFTER EFFECTS
               </div>
             </div>
-            <div className="card">
-              <h3>CLOUD & DEVOPS</h3>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>DATA SCIENCE TOOLS</h3>
               <div className="description">
-                AWS, DOCKER, KUBERNETES, CI/CD, GITHUB ACTIONS, 
-                TERRAFORM, MONITORING, SCALING
+                PYTHON, STATISTICAL ANALYSIS, MACHINE LEARNING, 
+                DATA VISUALIZATION, ANALYTICS
               </div>
             </div>
-            <div className="card">
-              <h3>TOOLS & TECHNOLOGIES</h3>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>CREATIVE & TECHNICAL</h3>
               <div className="description">
-                GIT, VS CODE, FIGMA, JIRA, SLACK, POSTMAN, 
-                TESTING FRAMEWORKS, AGILE METHODOLOGY
+                MOTION GRAPHICS, POST-PRODUCTION, CREATIVE PROBLEM-SOLVING, 
+                VISUAL STORYTELLING, TECHNICAL WRITING
               </div>
             </div>
           </div>
@@ -39,3 +41,5 @@ export function Skills() {
     </section>
   )
 }
+
+

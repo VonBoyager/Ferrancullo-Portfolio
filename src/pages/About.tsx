@@ -1,36 +1,33 @@
+import { usePageAnimation } from '../hooks/usePageAnimation'
+
 export function About() {
+  const { isVisible, isExiting } = usePageAnimation()
+
   return (
-    <section className="section about" aria-label="About">
+    <section className={`section about ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="About">
       <div className="container">
-        <div className="panel panel--inset">
-          <h2>ABOUT CED</h2>
+        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
+          <h2>ABOUT CEDRIC FERRANCULLO</h2>
           <div className="about-content">
             <p>
-              FULL STACK DEVELOPER WITH A PASSION FOR CREATING INNOVATIVE WEB SOLUTIONS. 
-              SPECIALIZED IN REACT, NODE.JS, AND MODERN WEB TECHNOLOGIES.
+              A STUDENT ASPIRING TO BE A DATA SCIENTIST WITH A TOUCH OF CREATIVE VIDEO CREATION. 
+              PASSIONATE ABOUT BRIDGING THE GAP BETWEEN ANALYTICAL THINKING AND CREATIVE EXPRESSION.
             </p>
             <p>
-              EXPERIENCED IN BUILDING SCALABLE APPLICATIONS AND DELIVERING HIGH-QUALITY 
-              USER EXPERIENCES. COMMITTED TO CONTINUOUS LEARNING AND STAYING UP-TO-DATE 
-              WITH THE LATEST TECHNOLOGIES.
+              CURRENTLY PURSUING DATA SCIENCE WITH STRONG FOUNDATIONS IN PROGRAMMING LANGUAGES 
+              INCLUDING REACT, NODE.JS, PYTHON, JAVA, AND C++. COMBINING TECHNICAL EXPERTISE WITH 
+              CREATIVE VIDEO EDITING SKILLS IN PREMIERE PRO AND AFTER EFFECTS.
             </p>
-            <div className="about-stats">
-              <div className="stat">
-                <span className="stat-number">3+</span>
-                <span className="stat-label">YEARS EXPERIENCE</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">50+</span>
-                <span className="stat-label">PROJECTS COMPLETED</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">CLIENT SATISFACTION</span>
-              </div>
-            </div>
+            <p>
+              BELIEVES IN THE POWER OF DATA TO TELL COMPELLING STORIES AND AIMS TO CREATE 
+              MEANINGFUL VISUAL NARRATIVES THAT BRING INSIGHTS TO LIFE. COMMITTED TO CONTINUOUS 
+              LEARNING AND EXPLORING THE INTERSECTION OF TECHNOLOGY AND CREATIVITY.
+            </p>
           </div>
         </div>
       </div>
     </section>
   )
 }
+
+

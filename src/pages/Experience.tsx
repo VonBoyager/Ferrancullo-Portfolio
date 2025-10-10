@@ -1,36 +1,22 @@
+import { usePageAnimation } from '../hooks/usePageAnimation'
+
 export function Experience() {
+  const { isVisible, isExiting } = usePageAnimation()
+
   return (
-    <section className="section experience" aria-label="Experience">
+    <section className={`section experience ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="Experience">
       <div className="container">
-        <div className="panel panel--inset">
+        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
           <h2>PROFESSIONAL EXPERIENCE</h2>
           <div className="grid">
-            <div className="card">
-              <h3>SENIOR FULL STACK DEVELOPER</h3>
-              <div className="position">TECH SOLUTIONS INC.</div>
+            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
+              <h3>FREELANCE VIDEO EDITOR</h3>
+              <div className="position">INDEPENDENT CONTRACTOR</div>
               <div className="period">2023 - PRESENT</div>
               <div className="description">
-                LEADING DEVELOPMENT OF SCALABLE WEB APPLICATIONS USING REACT, 
-                NODE.JS, AND CLOUD TECHNOLOGIES. MENTORING JUNIOR DEVELOPERS 
-                AND IMPLEMENTING BEST PRACTICES.
-              </div>
-            </div>
-            <div className="card">
-              <h3>FULL STACK DEVELOPER</h3>
-              <div className="position">DIGITAL AGENCY</div>
-              <div className="period">2022 - 2023</div>
-              <div className="description">
-                DEVELOPED CUSTOM WEB SOLUTIONS FOR CLIENTS ACROSS VARIOUS INDUSTRIES. 
-                WORKED WITH REACT, EXPRESS, AND MONGODB TO DELIVER HIGH-QUALITY APPLICATIONS.
-              </div>
-            </div>
-            <div className="card">
-              <h3>FRONTEND DEVELOPER</h3>
-              <div className="position">STARTUP VENTURES</div>
-              <div className="period">2021 - 2022</div>
-              <div className="description">
-                FOCUSED ON CREATING RESPONSIVE AND INTERACTIVE USER INTERFACES. 
-                SPECIALIZED IN REACT, TYPESCRIPT, AND MODERN CSS FRAMEWORKS.
+                PROVIDING PROFESSIONAL VIDEO EDITING SERVICES USING PREMIERE PRO AND AFTER EFFECTS. 
+                SPECIALIZING IN CREATIVE VIDEO PRODUCTION, MOTION GRAPHICS, AND POST-PRODUCTION 
+                WORKFLOWS. DELIVERING HIGH-QUALITY VISUAL CONTENT FOR VARIOUS CLIENTS AND PROJECTS.
               </div>
             </div>
           </div>
@@ -39,3 +25,5 @@ export function Experience() {
     </section>
   )
 }
+
+

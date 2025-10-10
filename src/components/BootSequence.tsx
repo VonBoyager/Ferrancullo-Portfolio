@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export function BootSequence() {
-  const [isVisible, setIsVisible] = useState(true)
-  const [currentLine, setCurrentLine] = useState(0)
+  const location = useLocation()
+  const navigate = useNavigate()
   
   const bootLines = [
     'INITIALIZING CED PORTFOLIO SYSTEM...',
@@ -14,41 +15,134 @@ export function BootSequence() {
     'ESTABLISHING SECURE CONNECTION...',
     'LOADING PORTFOLIO DATA...',
     'SYSTEM READY.',
-    'WELCOME TO CED PORTFOLIO TERMINAL.'
+    'WELCOME TO CED\'S RESUME.'
   ]
 
+  // Check if boot sequence has already been shown
+  const hasShownBefore = typeof window !== 'undefined' && window.localStorage 
+    ? localStorage.getItem('bootSequenceShown') 
+    : null
+
+  // Add global function to reset boot sequence for testing
+  (window as any).resetBootSequence = () => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('bootSequenceShown')
+    }
+    window.location.reload()
+  }
+
+  // Add global function to force show boot sequence
+  (window as any).showBootSequence = () => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('bootSequenceShown')
+    }
+    window.location.reload()
+  }
+
+  // Add global function to clear localStorage for testing
+  (window as any).clearBootSequence = () => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('bootSequenceShown')
+      console.log('BootSequence: localStorage cleared')
+    }
+  }
+
+  // Use useEffect to handle animation after component mounts
   useEffect(() => {
-    // Check if boot sequence has already been shown
-    const hasShownBefore = localStorage.getItem('bootSequenceShown')
-    if (hasShownBefore) {
-      setIsVisible(false)
+    // Only run animation if boot sequence hasn't been shown
+    if (hasShownBefore) return
+
+    // Use a more robust global flag system
+    const animationKey = 'bootSequenceAnimation_' + Date.now()
+    if ((window as any).bootSequenceActive) {
+      console.log('Boot sequence already active, skipping...')
       return
     }
+    ;(window as any).bootSequenceActive = animationKey
 
-    // Add global function to reset boot sequence for testing
-    (window as any).resetBootSequence = () => {
-      localStorage.removeItem('bootSequenceShown')
-      window.location.reload()
-    }
+    try {
+      const container = document.getElementById('boot-lines')
+      if (!container) {
+        ;(window as any).bootSequenceActive = null
+        return
+      }
 
-    const timer = setInterval(() => {
-      setCurrentLine((prev: number) => {
-        if (prev < bootLines.length - 1) {
-          return prev + 1
-        } else {
-          setTimeout(() => {
-            setIsVisible(false)
-            localStorage.setItem('bootSequenceShown', 'true')
-          }, 1000)
-          return prev
+      // Clear any existing content first
+      container.innerHTML = ''
+      
+      // Make boot lines visible when animation starts
+      container.style.opacity = '1'
+
+      let currentIndex = 0
+      let animationTimer: NodeJS.Timeout | null = null
+      let isAnimationComplete = false
+
+      function addLine() {
+        // Check if this is still the active animation
+        if ((window as any).bootSequenceActive !== animationKey || isAnimationComplete) {
+          return
         }
-      })
-    }, 300)
 
-    return () => clearInterval(timer)
-  }, [])
+        try {
+          if (currentIndex >= bootLines.length) {
+            // Animation complete
+            isAnimationComplete = true
+            ;(window as any).bootSequenceActive = null
+            return
+          }
+          
+          const lineDiv = document.createElement('div')
+          lineDiv.className = 'boot-line'
+          lineDiv.innerHTML = '<span class="boot-prefix">&gt;</span><span class="boot-text">' + bootLines[currentIndex] + '</span>'
+          container.appendChild(lineDiv)
+          
+          currentIndex++
+          animationTimer = setTimeout(() => addLine(), 300)
+        } catch (error) {
+          console.error('Error adding boot line:', error)
+          isAnimationComplete = true
+          ;(window as any).bootSequenceActive = null
+        }
+      }
 
-  if (!isVisible) return null
+      // Start animation after a short delay
+      setTimeout(() => addLine(), 100)
+
+      // Auto-redirect to home after showing boot sequence
+      const redirectTimer = setTimeout(() => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          localStorage.setItem('bootSequenceShown', 'true')
+        }
+        // Hide boot sequence before redirect
+        const bootSequence = document.querySelector('.boot-sequence')
+        if (bootSequence) {
+          bootSequence.style.opacity = '0'
+          bootSequence.style.transition = 'opacity 0.5s ease-out'
+        }
+        // Navigate after fade out
+        setTimeout(() => {
+          navigate('/')
+        }, 500)
+      }, 5000) // 5 seconds delay to allow animation to complete
+
+      return () => {
+        clearTimeout(redirectTimer)
+        if (animationTimer) clearTimeout(animationTimer)
+        isAnimationComplete = true
+        if ((window as any).bootSequenceActive === animationKey) {
+          ;(window as any).bootSequenceActive = null
+        }
+      }
+    } catch (error) {
+      console.error('BootSequence useEffect error:', error)
+      ;(window as any).bootSequenceActive = null
+    }
+  }, [navigate, bootLines, hasShownBefore])
+
+  // If boot sequence has already been shown, don't show anything
+  if (hasShownBefore) {
+    return null
+  }
 
   return (
     <div className="boot-sequence">
@@ -57,13 +151,8 @@ export function BootSequence() {
           <span className="boot-prompt">ced@portfolio:~$</span>
           <span className="boot-cursor">_</span>
         </div>
-        <div className="boot-lines">
-          {bootLines.slice(0, currentLine + 1).map((line, index) => (
-            <div key={index} className="boot-line">
-              <span className="boot-prefix">&gt;</span>
-              <span className="boot-text">{line}</span>
-            </div>
-          ))}
+        <div className="boot-lines" id="boot-lines" style={{ opacity: 0 }}>
+          {/* Lines will be added dynamically by JavaScript */}
         </div>
       </div>
     </div>

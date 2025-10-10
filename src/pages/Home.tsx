@@ -1,8 +1,12 @@
+import { usePageAnimation } from '../hooks/usePageAnimation'
+
 export function Home() {
+  const { isVisible, isExiting } = usePageAnimation()
+
   return (
-    <section className="section hero" aria-label="Home">
+    <section className={`section hero ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="Home">
       <div className="container">
-        <div className="panel panel--inset">
+        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
           <div className="hero-content">
             <h1>
               CED - FULL STACK DEVELOPER
@@ -21,3 +25,5 @@ export function Home() {
     </section>
   )
 }
+
+
