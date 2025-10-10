@@ -6,14 +6,18 @@ interface Command {
   execute: (args: string[]) => string
 }
 
+interface HistoryEntry {
+  type: 'command' | 'output'
+  content: string
+}
+
 export function Terminal() {
-  const [history, setHistory] = useState<Array<{ type: 'command' | 'output', content: string }>>([
+  const [history, setHistory] = useState<HistoryEntry[]>([
     { type: 'output', content: 'Welcome to Ced\'s Portfolio Terminal' },
     { type: 'output', content: 'Type "help" for available commands' },
     { type: 'output', content: '' }
   ])
   const [currentInput, setCurrentInput] = useState('')
-  const [currentPath, setCurrentPath] = useState('~/portfolio')
   const inputRef = useRef<HTMLInputElement>(null)
 
   const commands: Record<string, Command> = {
@@ -44,14 +48,14 @@ export function Terminal() {
     about: {
       name: 'about',
       description: 'About Ced',
-      execute: () => `Ced - Full Stack Developer & Digital Artist
+      execute: (args: string[]) => `Ced - Full Stack Developer & Digital Artist
 Passionate about creating innovative solutions and pushing the boundaries of web technology.
 Specializing in React, Node.js, and experimental web design.`
     },
     education: {
       name: 'education',
       description: 'Educational background',
-      execute: () => `Bachelor of Science in Computer Science
+      execute: (args: string[]) => `Bachelor of Science in Computer Science
 University of Technology, 2020-2024
 - GPA: 3.8/4.0
 - Relevant Coursework: Data Structures, Algorithms, Web Development
@@ -60,7 +64,7 @@ University of Technology, 2020-2024
     experience: {
       name: 'experience',
       description: 'Work experience',
-      execute: () => `Senior Frontend Developer - TechCorp (2023-Present)
+      execute: (args: string[]) => `Senior Frontend Developer - TechCorp (2023-Present)
 - Led development of React-based applications
 - Implemented modern UI/UX patterns
 - Mentored junior developers
@@ -73,7 +77,7 @@ Full Stack Developer - StartupXYZ (2022-2023)
     skills: {
       name: 'skills',
       description: 'Technical skills',
-      execute: () => `Languages: JavaScript, TypeScript, Python, Java, C++
+      execute: (args: string[]) => `Languages: JavaScript, TypeScript, Python, Java, C++
 Frameworks: React, Node.js, Express, Next.js
 Databases: PostgreSQL, MongoDB, Redis
 Tools: Git, Docker, AWS, Vercel
@@ -82,7 +86,7 @@ Design: Figma, Adobe Creative Suite, CSS/SCSS`
     projects: {
       name: 'projects',
       description: 'Portfolio projects',
-      execute: () => `Featured Projects:
+      execute: (args: string[]) => `Featured Projects:
 1. E-Commerce Platform (React, Node.js, PostgreSQL)
 2. Real-time Chat Application (Socket.io, Express)
 3. Data Visualization Dashboard (D3.js, React)
@@ -92,7 +96,7 @@ Design: Figma, Adobe Creative Suite, CSS/SCSS`
     contact: {
       name: 'contact',
       description: 'Contact information',
-      execute: () => `Email: ced@example.com
+      execute: (args: string[]) => `Email: ced@example.com
 LinkedIn: linkedin.com/in/ced
 GitHub: github.com/ced
 Twitter: @ced_dev
@@ -101,7 +105,7 @@ Phone: +1 (555) 123-4567`
     clear: {
       name: 'clear',
       description: 'Clear terminal',
-      execute: () => {
+      execute: (args: string[]) => {
         setHistory([])
         return ''
       }
@@ -109,7 +113,7 @@ Phone: +1 (555) 123-4567`
     ls: {
       name: 'ls',
       description: 'List sections',
-      execute: () => `about.txt
+      execute: (args: string[]) => `about.txt
 education.txt
 experience.txt
 skills.txt
@@ -140,17 +144,17 @@ README.md`
     whoami: {
       name: 'whoami',
       description: 'Show current user',
-      execute: () => 'ced'
+      execute: (args: string[]) => 'ced'
     },
     pwd: {
       name: 'pwd',
       description: 'Show current directory',
-      execute: () => currentPath
+      execute: (args: string[]) => '~/portfolio'
     },
     date: {
       name: 'date',
       description: 'Show current date',
-      execute: () => new Date().toString()
+      execute: (args: string[]) => new Date().toString()
     },
     echo: {
       name: 'echo',
@@ -160,7 +164,7 @@ README.md`
     neofetch: {
       name: 'neofetch',
       description: 'System information',
-      execute: () => `       ███████╗███████╗███╗   ██╗
+      execute: (args: string[]) => `       ███████╗███████╗███╗   ██╗
        ██╔════╝██╔════╝████╗  ██║
        █████╗  █████╗  ██╔██╗ ██║
        ██╔══╝  ██╔══╝  ██║╚██╗██║
@@ -180,7 +184,7 @@ Uptime: ${Math.floor(Math.random() * 100)} days`
     matrix: {
       name: 'matrix',
       description: 'Enter the matrix',
-      execute: () => {
+      execute: (args: string[]) => {
         // This would trigger a matrix rain effect
         return 'Wake up, Neo... The Matrix has you...'
       }
@@ -188,7 +192,7 @@ Uptime: ${Math.floor(Math.random() * 100)} days`
     hack: {
       name: 'hack',
       description: 'Hack the mainframe',
-      execute: () => {
+      execute: (args: string[]) => {
         const hackText = [
           'Initializing hack sequence...',
           'Bypassing firewall...',
@@ -204,7 +208,7 @@ Uptime: ${Math.floor(Math.random() * 100)} days`
     fortune: {
       name: 'fortune',
       description: 'Get a random fortune',
-      execute: () => {
+      execute: (args: string[]) => {
         const fortunes = [
           'The best way to predict the future is to code it.',
           'There are only 10 types of people: those who understand binary and those who don\'t.',
@@ -230,16 +234,16 @@ Uptime: ${Math.floor(Math.random() * 100)} days`
     if (commands[command]) {
       const result = commands[command].execute(args)
       if (result) {
-        setHistory(prev => [...prev, { type: 'output', content: result }])
+        setHistory((prev: HistoryEntry[]) => [...prev, { type: 'output', content: result }])
       }
     } else {
-      setHistory(prev => [...prev, { type: 'output', content: `Command not found: ${command}. Type "help" for available commands.` }])
+      setHistory((prev: HistoryEntry[]) => [...prev, { type: 'output', content: `Command not found: ${command}. Type "help" for available commands.` }])
     }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      setHistory(prev => [...prev, { type: 'command', content: `ced@portfolio:~$ ${currentInput}` }])
+      setHistory((prev: HistoryEntry[]) => [...prev, { type: 'command', content: `ced@portfolio:~$ ${currentInput}` }])
       executeCommand(currentInput)
       setCurrentInput('')
     }
