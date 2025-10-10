@@ -1,27 +1,34 @@
-/* CRT Terminal color system */
+/* Authentic CRT Terminal System */
 :root {
-  /* CRT Terminal palette */
-  --bg: #000000;           /* pure black */
-  --bg-soft: #0a0a0a;      /* dark terminal */
-  --fg: #00ff00;           /* phosphor green */
-  --fg-dim: #00aa00;       /* dim phosphor */
-  --border: #00ff00;       /* terminal border */
-  --white: #ffffff;
-  --black: #000000;
-  --accent-1: #ffff00;     /* amber */
-  --accent-2: #00ffff;     /* cyan */
-  --accent-3: #ff00ff;     /* magenta */
-  --cursor: #00ff00;       /* blinking cursor */
-  --prompt: #00ffff;       /* prompt color */
-  --scanline: rgba(0, 255, 0, 0.08);
-  --glow: rgba(0, 255, 0, 0.15);
-
-  /* CRT geometry */
+  /* Classic Terminal Colors */
+  --terminal-green: #39ff14;    /* authentic phosphor green */
+  --terminal-amber: #ffb000;   /* amber terminal */
+  --terminal-cyan: #00ffff;    /* cyan accent */
+  --terminal-white: #c0c0c0;   /* terminal white */
+  --terminal-black: #000000;   /* pure black */
+  --terminal-dim: #00aa00;     /* dim green */
+  
+  /* Background */
+  --bg: #000000;
+  --bg-soft: #0a0a0a;
+  --fg: var(--terminal-green);
+  --fg-dim: var(--terminal-dim);
+  --border: var(--terminal-green);
+  
+  /* Accents */
+  --accent-1: var(--terminal-amber);
+  --accent-2: var(--terminal-cyan);
+  --accent-3: #ff00ff;
+  
+  /* CRT Effects */
+  --scanline: rgba(57, 255, 20, 0.15);
+  --glow: rgba(57, 255, 20, 0.3);
+  
+  /* Typography */
+  --font-mono: "VT323", "JetBrains Mono", "Courier New", monospace;
+  
+  /* Layout */
   --radius: 0px;
-  --radius-sm: 0px;
-  --shadow: 0 0 20px currentColor;
-
-  /* CRT spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 16px;
@@ -31,7 +38,7 @@
   --max-w: 100vw;
 }
 
-/* CRT Terminal base reset */
+/* Authentic CRT Terminal Reset */
 * { 
   box-sizing: border-box; 
   margin: 0;
@@ -40,7 +47,7 @@
 html, body, #app { 
   height: 100%; 
   overflow-x: hidden;
-  font-family: "JetBrains Mono", "Courier New", "Monaco", monospace;
+  font-family: var(--font-mono);
 }
 html, body {
   background: var(--bg);
@@ -48,13 +55,14 @@ html, body {
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   text-shadow: 
-    0 0 2px currentColor,
-    0 0 4px currentColor,
-    0 0 8px currentColor;
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
   scroll-behavior: auto;
   cursor: text;
-  line-height: 1.4;
-  font-size: 14px;
+  line-height: 1.2;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 /* Terminal animation keyframes */
@@ -116,7 +124,7 @@ html, body {
   }
 }
 
-/* CRT Terminal background system */
+/* Authentic CRT Background System */
 .app-root { 
   position: relative; 
   min-height: 100vh; 
@@ -124,97 +132,110 @@ html, body {
   background: var(--bg);
   border: 2px solid var(--border);
   box-shadow: 
-    inset 0 0 50px rgba(0, 255, 0, 0.1),
-    0 0 100px rgba(0, 255, 0, 0.05);
+    inset 0 0 50px var(--glow),
+    0 0 100px rgba(57, 255, 20, 0.1);
 }
-.app-root::after {
+
+/* CRT Scanlines - Authentic Implementation */
+.app-root::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    repeating-linear-gradient(0deg, transparent, transparent 1px, var(--scanline) 1px, var(--scanline) 2px);
-  animation: scanline 2s linear infinite;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    var(--scanline) 1px,
+    var(--scanline) 2px
+  );
   pointer-events: none;
   z-index: 1;
+  opacity: 0.8;
 }
+
+/* CRT Screen Curvature */
+.app-root {
+  transform: perspective(1000px) rotateX(0.2deg);
+}
+
 .bg-gradient {
   position: fixed; 
   inset: 0; 
   z-index: -2;
-  background: 
-    repeating-linear-gradient(0deg, transparent, transparent 1px, var(--scanline) 1px, var(--scanline) 2px),
-    repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0, 255, 0, 0.01) 1px, rgba(0, 255, 0, 0.01) 2px);
+  background: var(--bg);
 }
+
 .bg-grain {
   position: fixed; 
   inset: 0; 
   z-index: -1;
   background: 
-    repeating-linear-gradient(0deg, transparent, transparent 1px, var(--scanline) 1px, var(--scanline) 2px),
-    url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><filter id='noise'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 .01 .02 .03 .04 .05 .06 .07 .08 .09 .1 .11 .12 1'/></feComponentTransfer><feBlend mode='screen'/></filter><rect width='100%' height='100%' filter='url(%23noise)'/></svg>");
-  animation: scanline 3s linear infinite;
-  opacity: 0.6;
+    url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='noise'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 .01 .02 .03 .04 .05 .06 .07 .08 .09 .1 .11 .12 1'/></feComponentTransfer><feBlend mode='screen'/></filter><rect width='100%' height='100%' filter='url(%23noise)'/></svg>");
+  opacity: 0.3;
+  mix-blend-mode: screen;
 }
 
-/* CRT Terminal typography */
-h1, h2, h3 { 
+/* Consistent CRT Typography */
+h1, h2, h3, h4, h5, h6 { 
   line-height: 1.2; 
-  margin: 0; 
+  margin: 0 0 var(--space-3); 
   font-weight: 400; 
-  font-family: "JetBrains Mono", "Courier New", "Monaco", monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   position: relative;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
 }
 h1 { 
-  font-size: clamp(20px, 5vw, 40px); 
+  font-size: clamp(24px, 6vw, 48px); 
   color: var(--fg);
   text-shadow: 
-    0 0 2px currentColor,
-    0 0 4px currentColor,
-    0 0 8px currentColor,
-    0 0 16px currentColor;
-  animation: terminalGlow 3s ease-in-out infinite;
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
 }
 h1::after {
   content: '_';
-  animation: blink 1.2s infinite;
-  color: var(--cursor);
+  animation: blink 1s infinite;
+  color: var(--fg);
   text-shadow: 0 0 5px currentColor;
 }
 h2 { 
-  font-size: clamp(16px, 4vw, 28px); 
+  font-size: clamp(18px, 4vw, 32px); 
   color: var(--accent-2);
   text-shadow: 
-    0 0 2px currentColor,
-    0 0 4px currentColor,
-    0 0 8px currentColor;
+    0 0 3px currentColor,
+    0 0 6px currentColor;
 }
 h3 { 
-  font-size: clamp(14px, 3vw, 20px); 
+  font-size: clamp(16px, 3vw, 24px); 
   color: var(--accent-1);
   text-shadow: 
     0 0 2px currentColor,
     0 0 4px currentColor;
 }
+p, li, span, div {
+  font-family: var(--font-mono);
+  color: var(--fg-dim);
+  text-shadow: 0 0 2px currentColor;
+}
 p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
 .lede { font-size: clamp(16px, 1.6vw, 20px); color: #2a2a2a; font-weight: 600; }
 .fade { color: #555555; font-weight: 700; }
 
-/* CRT Terminal navbar */
+/* Consistent CRT Navbar */
 .navbar {
   position: sticky; top: 0; z-index: 10;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   border-left: 1px solid var(--border);
   border-right: 1px solid var(--border);
-  font-family: "JetBrains Mono", "Courier New", "Monaco", monospace;
+  font-family: var(--font-mono);
   box-shadow: 
-    inset 0 0 20px rgba(0, 255, 0, 0.05),
-    0 0 20px rgba(0, 255, 0, 0.1);
+    inset 0 0 20px var(--glow),
+    0 0 20px rgba(57, 255, 20, 0.1);
 }
 .navbar > .container { 
   display: flex; 
@@ -223,21 +244,18 @@ p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
   gap: var(--space-3); 
   padding: var(--space-2) var(--space-4);
   background: 
-    repeating-linear-gradient(90deg, transparent, transparent 1px, var(--scanline) 1px, var(--scanline) 2px),
-    repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 255, 0, 0.02) 1px, rgba(0, 255, 0, 0.02) 2px);
+    repeating-linear-gradient(90deg, transparent, transparent 1px, var(--scanline) 1px, var(--scanline) 2px);
 }
 .logo { 
   font-weight: 400; 
   letter-spacing: 0.1em; 
   text-transform: uppercase; 
   text-decoration: none;
-  color: var(--prompt);
-  font-size: 1.1em;
+  color: var(--fg);
+  font-size: 1.2em;
   text-shadow: 
-    0 0 2px currentColor,
-    0 0 4px currentColor,
-    0 0 8px currentColor;
-  animation: terminalGlow 4s ease-in-out infinite;
+    0 0 5px currentColor,
+    0 0 10px currentColor;
 }
 .logo::before {
   content: 'ced@portfolio:~$ ';
@@ -247,14 +265,14 @@ p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
 .logo:hover {
   color: var(--fg);
   text-shadow: 
-    0 0 3px currentColor,
-    0 0 6px currentColor,
-    0 0 12px currentColor;
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
 }
 .nav-links { 
   display: flex; 
   gap: var(--space-2); 
-  font-family: "JetBrains Mono", "Courier New", "Monaco", monospace;
+  font-family: var(--font-mono);
 }
 .nav-links a { 
   color: var(--fg-dim); 
@@ -265,6 +283,8 @@ p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
   padding: 2px 6px;
   border: 1px solid transparent;
   text-shadow: 0 0 2px currentColor;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .nav-links a::before {
   content: './';
@@ -275,19 +295,17 @@ p { margin: 0 0 var(--space-3); color: var(--fg-dim); max-width: 72ch; }
   color: var(--fg);
   border-color: var(--border);
   text-shadow: 
-    0 0 2px currentColor,
-    0 0 4px currentColor,
-    0 0 8px currentColor;
-  background: rgba(0, 255, 0, 0.05);
+    0 0 3px currentColor,
+    0 0 6px currentColor;
+  background: rgba(57, 255, 20, 0.1);
 }
 .nav-links a.active { 
   color: var(--accent-1);
   border-color: var(--accent-1);
   text-shadow: 
-    0 0 2px currentColor,
-    0 0 4px currentColor,
-    0 0 8px currentColor;
-  background: rgba(255, 255, 0, 0.05);
+    0 0 3px currentColor,
+    0 0 6px currentColor;
+  background: rgba(255, 176, 0, 0.1);
 }
 
 /* Layout */
@@ -314,15 +332,16 @@ main {
 .section:first-of-type { padding-top: calc(var(--space-6) + 24px); }
 .container { max-width: var(--max-w); margin: 0 auto; }
 
-/* CRT Terminal panels */
+/* Consistent CRT Panels */
 .panel { 
   border: 1px solid var(--border); 
   border-radius: var(--radius); 
-  background: rgba(0, 0, 0, 0.8); 
+  background: rgba(0, 0, 0, 0.9); 
   box-shadow: 
-    inset 0 0 20px rgba(0, 255, 0, 0.1),
-    0 0 20px rgba(0, 255, 0, 0.05);
+    inset 0 0 20px var(--glow),
+    0 0 20px rgba(57, 255, 20, 0.1);
   position: relative;
+  font-family: var(--font-mono);
 }
 .panel::before {
   content: '';
@@ -334,10 +353,10 @@ main {
   background: 
     repeating-linear-gradient(0deg, transparent, transparent 1px, var(--scanline) 1px, var(--scanline) 2px);
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 .panel--alt { 
-  background: rgba(0, 0, 0, 0.9); 
+  background: rgba(0, 0, 0, 0.95); 
   border-color: var(--accent-2);
   box-shadow: 
     inset 0 0 20px rgba(0, 255, 255, 0.1),
