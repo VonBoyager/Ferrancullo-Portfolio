@@ -14,7 +14,7 @@ import { Contact } from './pages/Contact'
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/Ferrancullo-Portfolio">
       <div className="app-root">
         <div className="bg-gradient" />
         <div className="bg-grain" />
