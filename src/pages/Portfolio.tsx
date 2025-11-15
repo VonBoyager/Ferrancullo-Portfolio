@@ -1,97 +1,73 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
-import { Link, Routes, Route } from 'react-router-dom'
-import { Kobo } from './Kobo'
-import { AiChatAssistant } from './AiChatAssistant'
-import { DataVisualizationDashboard } from './DataVisualizationDashboard'
-import { ECommercePlatform } from './ECommercePlatform'
+import { useState } from 'react'
 
 export function Portfolio() {
   const { isVisible, isExiting } = usePageAnimation()
+  const [showPopup, setShowPopup] = useState(false)
 
   return (
     <section className={`section portfolio ${isVisible ? 'page-enter-active' : 'page-enter'} ${isExiting ? 'page-exit' : ''}`} aria-label="Portfolio">
       <div className="container">
         <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
-          <h2>COMPLETED PROJECTS</h2>
+          <h2>PORTFOLIO PROJECTS</h2>
           <div className="grid">
             <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
               <h3>YOUTUBE</h3>
               <div className="description">
-                CREATIVE VIDEO CONTENT AND EDITING PORTFOLIO.
+                CREATIVE VIDEO CONTENT AND EDITING PORTFOLIO. 
                 SHOWCASING VIDEO EDITING SKILLS, CREATIVE PROJECTS, AND DIGITAL CONTENT CREATION.
               </div>
               <div className="card-actions">
                 <a className="btn primary" href="https://ytjobs.co/talent/vitrine/45782" target="_blank">VIEW PORTFOLIO</a>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
-          <h2>ONGOING PROJECTS</h2>
-          <div className="grid">
             <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
               <h3>KOBO</h3>
               <div className="description">
-                SENTIMENT ANALYZER FOR EMPLOYEE REVIEWS.
-                ADVANCED NLP TOOL THAT PROCESSES AND ANALYZES EMPLOYEE FEEDBACK TO EXTRACT INSIGHTS,
+                SENTIMENT ANALYZER FOR EMPLOYEE REVIEWS. 
+                ADVANCED NLP TOOL THAT PROCESSES AND ANALYZES EMPLOYEE FEEDBACK TO EXTRACT INSIGHTS, 
                 IDENTIFY TRENDS, AND PROVIDE ACTIONABLE RECOMMENDATIONS FOR HR DEPARTMENTS.
               </div>
               <div className="card-actions">
-                <Link to="/portfolio/kobo" className="btn primary">
+                <button 
+                  className="btn primary" 
+                  onClick={() => setShowPopup(true)}
+                >
                   VIEW PROJECT
-                </Link>
-              </div>
-            </div>
-            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
-              <h3>AI-CHAT ASSISTANT</h3>
-              <div className="description">
-                INTELLIGENT CONVERSATIONAL AI SYSTEM.
-                BUILT WITH ADVANCED MACHINE LEARNING TO PROVIDE NATURAL LANGUAGE INTERACTIONS,
-                CONTEXT-AWARE RESPONSES, AND INTEGRATION WITH MULTIPLE PLATFORMS.
-              </div>
-              <div className="card-actions">
-                <Link to="/portfolio/ai-chat-assistant" className="btn primary">
-                  VIEW PROJECT
-                </Link>
-              </div>
-            </div>
-            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
-              <h3>DATA VISUALIZATION DASHBOARD</h3>
-              <div className="description">
-                INTERACTIVE ANALYTICS PLATFORM.
-                REAL-TIME DATA PROCESSING AND VISUALIZATION TOOL THAT TRANSFORMS COMPLEX DATASETS
-                INTO INTUITIVE DASHBOARDS WITH CUSTOMIZABLE CHARTS AND REPORTING FEATURES.
-              </div>
-              <div className="card-actions">
-                <Link to="/portfolio/data-visualization-dashboard" className="btn primary">
-                  VIEW PROJECT
-                </Link>
-              </div>
-            </div>
-            <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
-              <h3>E-COMMERCE PLATFORM</h3>
-              <div className="description">
-                FULL-STACK ONLINE RETAIL SOLUTION.
-                COMPLETE E-COMMERCE SYSTEM WITH USER MANAGEMENT, PAYMENT PROCESSING,
-                INVENTORY MANAGEMENT, AND ADMIN PANEL FOR BUSINESS OPERATIONS.
-              </div>
-              <div className="card-actions">
-                <Link to="/portfolio/ecommerce-platform" className="btn primary">
-                  VIEW PROJECT
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
-
-        <Routes>
-          <Route path="kobo" element={<Kobo />} />
-          <Route path="ai-chat-assistant" element={<AiChatAssistant />} />
-          <Route path="data-visualization-dashboard" element={<DataVisualizationDashboard />} />
-          <Route path="ecommerce-platform" element={<ECommercePlatform />} />
-        </Routes>
       </div>
+      
+      {/* Stylized Popup */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <div className="popup-header">
+              <h3>KOBO PROJECT</h3>
+              <button className="popup-close" onClick={() => setShowPopup(false)}>×</button>
+            </div>
+            <div className="popup-body">
+              <div className="work-in-progress">
+                <div className="progress-icon">⚙️</div>
+                <h4>WORK IN PROGRESS</h4>
+                <p>THIS PROJECT IS CURRENTLY UNDER CONSTRUCTION.</p>
+                <p>COMING SOON WITH INNOVATIVE FEATURES!</p>
+                <div className="progress-bar">
+                  <div className="progress-fill"></div>
+                </div>
+              </div>
+            </div>
+            <div className="popup-footer">
+              <button className="btn primary" onClick={() => setShowPopup(false)}>
+                UNDERSTOOD
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

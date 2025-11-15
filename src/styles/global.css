@@ -1009,9 +1009,6 @@ body:has(.boot-sequence) .footer {
 .work-in-progress {
   text-align: center;
 }
-.work-in-progress p {
-  text-align: center;
-}
 
 .progress-icon {
   font-size: 3em;
@@ -1235,7 +1232,6 @@ body:has(.boot-sequence) .footer {
   gap: var(--space-2);
   margin-top: auto;
   padding-top: var(--space-3);
-  justify-content: center;
 }
 
 /* Contact Methods */

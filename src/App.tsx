@@ -11,10 +11,6 @@ import { Certification } from './pages/Certification'
 import { Advocacy } from './pages/Advocacy'
 import { Portfolio } from './pages/Portfolio'
 import { Contact } from './pages/Contact'
-import { Kobo } from './pages/Kobo'
-import { AiChatAssistant } from './pages/AiChatAssistant'
-import { DataVisualizationDashboard } from './pages/DataVisualizationDashboard'
-import { ECommercePlatform } from './pages/ECommercePlatform'
 
 export default function App() {
   return (
@@ -36,12 +32,8 @@ export default function App() {
             <Route path="/skills" element={<Skills />} />
             <Route path="/certification" element={<Certification />} />
             <Route path="/advocacy" element={<Advocacy />} />
-            <Route path="/portfolio/*" element={<Portfolio />} />
+            <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/portfolio/kobo" element={<Kobo />} />
-            <Route path="/portfolio/ai-chat-assistant" element={<AiChatAssistant />} />
-            <Route path="/portfolio/data-visualization-dashboard" element={<DataVisualizationDashboard />} />
-            <Route path="/portfolio/ecommerce-platform" element={<ECommercePlatform />} />
           </Routes>
         </main>
       </div>
