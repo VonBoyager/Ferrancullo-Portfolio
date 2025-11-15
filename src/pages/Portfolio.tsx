@@ -1,5 +1,5 @@
 import { usePageAnimation } from '../hooks/usePageAnimation'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import { Kobo } from './Kobo'
 import { AiChatAssistant } from './AiChatAssistant'
 import { DataVisualizationDashboard } from './DataVisualizationDashboard'
@@ -38,7 +38,7 @@ export function Portfolio() {
                     IDENTIFY TRENDS, AND PROVIDE ACTIONABLE RECOMMENDATIONS FOR HR DEPARTMENTS.
                   </div>
                   <div className="card-actions">
-                    <a className="btn primary" href="/portfolio/kobo">VIEW PROJECT</a>
+                    <Link className="btn primary" to="kobo">VIEW PROJECT</Link>
                   </div>
                 </div>
                 <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
@@ -48,7 +48,7 @@ export function Portfolio() {
                     BUILT WITH ADVANCED MACHINE LEARNING TO PROVIDE NATURAL LANGUAGE INTERACTIONS, CONTEXT-AWARE RESPONSES, AND INTEGRATION WITH MULTIPLE PLATFORMS.
                   </div>
                   <div className="card-actions">
-                    <a className="btn primary" href="/portfolio/ai-chat-assistant">VIEW PROJECT</a>
+                    <Link className="btn primary" to="ai-chat-assistant">VIEW PROJECT</Link>
                   </div>
                 </div>
                 <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
@@ -58,7 +58,7 @@ export function Portfolio() {
                     REAL-TIME DATA PROCESSING AND VISUALIZATION TOOL THAT TRANSFORMS COMPLEX DATASETS INTO INTUITIVE DASHBOARDS WITH CUSTOMIZABLE CHARTS AND REPORTING FEATURES.
                   </div>
                   <div className="card-actions">
-                    <a className="btn primary" href="/portfolio/data-visualization-dashboard">VIEW PROJECT</a>
+                    <Link className="btn primary" to="data-visualization-dashboard">VIEW PROJECT</Link>
                   </div>
                 </div>
                 <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
@@ -68,7 +68,7 @@ export function Portfolio() {
                     COMPLETE E-COMMERCE SYSTEM WITH USER MANAGEMENT, PAYMENT PROCESSING, INVENTORY MANAGEMENT, AND ADMIN PANEL FOR BUSINESS OPERATIONS.
                   </div>
                   <div className="card-actions">
-                    <a className="btn primary" href="/portfolio/e-commerce-platform">VIEW PROJECT</a>
+                    <Link className="btn primary" to="e-commerce-platform">VIEW PROJECT</Link>
                   </div>
                 </div>
               </div>
