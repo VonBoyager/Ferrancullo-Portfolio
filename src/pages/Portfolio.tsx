@@ -15,7 +15,7 @@ export function Portfolio() {
           <div className="container">
             <div className={`panel panel--inset ${isVisible ? 'panel-enter' : ''} ${isExiting ? 'panel-exit' : ''}`}>
               <h2>COMPLETED PROJECTS</h2>
-              <div className="grid">
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
                 <div className={`card ${isVisible ? 'card-enter' : ''} ${isExiting ? 'card-exit' : ''}`}>
                   <h3>YOUTUBE</h3>
                   <div className="description">
