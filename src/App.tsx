@@ -32,7 +32,7 @@ export default function App() {
             <Route path="/skills" element={<Skills />} />
             <Route path="/certification" element={<Certification />} />
             <Route path="/advocacy" element={<Advocacy />} />
-            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/*" element={<Portfolio />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
